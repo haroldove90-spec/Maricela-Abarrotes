@@ -1,6 +1,6 @@
 {
-  "name": "OXXO POS - Terminal de Punto de Venta",
-  "description": "Sistema de punto de venta retail estilo OXXO México con escaneo de código de barras, pago de servicios (CFE, agua, gas), tiempo aire TAE, depósitos bancarios, Spin by OXXO, OXXO Premia, redondeo, arqueo de caja y ticket térmico.",
+  "name": "Abarrotes Maricela - Punto de Venta",
+  "description": "Sistema de punto de venta retail para Abarrotes Maricela con escaneo de código de barras, inventario, proveedores, métricas, servicios CFE, tiempo aire TAE y ticket térmico.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

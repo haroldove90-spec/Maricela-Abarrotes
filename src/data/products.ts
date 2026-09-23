@@ -600,9 +600,9 @@ export const INITIAL_SHIFT: {
   initialCash: number;
 } = {
   terminalId: 'CAJA 01',
-  storeName: 'OXXO PLAZA TECNOLÓGICO',
-  storeNumber: '50MON5023',
-  cashierName: 'Juan Carlos M.',
-  cashierId: '48201',
+  storeName: 'ABARROTES MARICELA',
+  storeNumber: 'SUC-01-CENTRO',
+  cashierName: 'Maricela G.',
+  cashierId: 'MAR-101',
   initialCash: 1000.00
 };

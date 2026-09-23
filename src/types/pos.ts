@@ -19,10 +19,39 @@ export interface Product {
   price: number;
   cost: number;
   stock: number;
+  minStock?: number;
+  supplierId?: string;
   ivaRate: number; // 0.16 or 0
   iepsRate: number; // 0.08 or 0
   promoText?: string;
   colorBadge?: string;
+}
+
+export interface Supplier {
+  id: string;
+  name: string;
+  companyName: string;
+  contactPerson: string;
+  phone: string;
+  email: string;
+  deliveryDays: string[];
+  categories: ProductCategory[];
+  pendingBalance: number;
+  creditDays: number;
+  lastDelivery?: string;
+}
+
+export interface PurchaseOrder {
+  id: string;
+  folio: string;
+  supplierId: string;
+  supplierName: string;
+  date: string;
+  timestamp: number;
+  itemsCount: number;
+  totalCost: number;
+  status: 'recibido' | 'pendiente';
+  notes?: string;
 }
 
 export interface CartItem {

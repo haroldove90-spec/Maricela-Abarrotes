@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Header } from './components/Header';
+import { Header, NavTab } from './components/Header';
 import { ScannerInput } from './components/ScannerInput';
 import { TicketTable } from './components/TicketTable';
 import { TotalsSummary } from './components/TotalsSummary';
@@ -16,14 +16,60 @@ import { SecondRegisterModal } from './components/SecondRegisterModal';
 import { CashMovementModal } from './components/CashMovementModal';
 import { BarcodeCameraModal } from './components/BarcodeCameraModal';
 import { CombosModal } from './components/CombosModal';
+import { InventoryModule } from './components/InventoryModule';
+import { SuppliersModule } from './components/SuppliersModule';
+import { MetricsModule } from './components/MetricsModule';
 
 import { Product, CartItem, SaleTransaction, ShiftSummary } from './types/pos';
 import { INITIAL_PRODUCTS, INITIAL_SHIFT } from './data/products';
 import { playScannerBeep, playCashDrawerSound, playErrorBuzz } from './utils/audio';
 
 export default function App() {
-  // Products state
-  const [products] = useState<Product[]>(INITIAL_PRODUCTS);
+  // Active Navigation Tab
+  const [activeTab, setActiveTab] = useState<NavTab>('pos');
+
+  // Products state (persisted to localStorage)
+  const [products, setProducts] = useState<Product[]>(() => {
+    const saved = localStorage.getItem('maricela_pos_products');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        // Fallback
+      }
+    }
+    return INITIAL_PRODUCTS;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('maricela_pos_products', JSON.stringify(products));
+  }, [products]);
+
+  const handleAddProduct = useCallback((newProduct: Product) => {
+    setProducts((prev) => [newProduct, ...prev]);
+  }, []);
+
+  const handleUpdateProduct = useCallback((updatedProduct: Product) => {
+    setProducts((prev) =>
+      prev.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
+    );
+  }, []);
+
+  const handleDeleteProduct = useCallback((productId: string) => {
+    setProducts((prev) => prev.filter((p) => p.id !== productId));
+  }, []);
+
+  const handleAdjustStock = useCallback((productId: string, delta: number) => {
+    setProducts((prev) =>
+      prev.map((p) => {
+        if (p.id === productId) {
+          const newStock = Math.max(0, p.stock + delta);
+          return { ...p, stock: newStock };
+        }
+        return p;
+      })
+    );
+  }, []);
 
   // Cart & Transaction State
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -33,6 +79,9 @@ export default function App() {
 
   // Sound preference
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+
+  // Recent transactions list for metrics
+  const [recentTransactions, setRecentTransactions] = useState<SaleTransaction[]>([]);
 
   // Shift & Cash Drawer Accounting State
   const [shift, setShift] = useState<ShiftSummary>(() => {
@@ -301,6 +350,18 @@ export default function App() {
         };
       });
 
+      // Deduct sold units from inventory stock
+      setProducts((prev) =>
+        prev.map((prod) => {
+          const itemSold = transaction.items.find((i) => i.product.id === prod.id && !i.isService);
+          if (itemSold) {
+            return { ...prod, stock: Math.max(0, prod.stock - itemSold.quantity) };
+          }
+          return prod;
+        })
+      );
+
+      setRecentTransactions((prev) => [transaction, ...prev.slice(0, 49)]);
       setLastTransaction(transaction);
       setShowPaymentModal(false);
       setShowReceiptModal(true);
@@ -421,67 +482,121 @@ export default function App() {
         cashierName={shift.cashierName}
         cashierId={shift.cashierId}
         soundEnabled={soundEnabled}
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
         onToggleSound={() => setSoundEnabled((prev) => !prev)}
         onOpenSecondRegister={() => setShowSecondRegisterModal(true)}
         onOpenCorteCaja={() => setShowCorteCajaModal(true)}
+        cartCount={cartItems.length}
       />
 
-      {/* Main POS Split Screen: Left (Ticket & Scanner) / Right (Quick Product Touch Catalog) */}
-      <main className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        {/* Left Side: Workstation Register (Scanner, Items Table, Totals, Actions) */}
-        <section className="flex-1 flex flex-col h-full overflow-hidden bg-white border-r border-neutral-300">
-          {/* Scanner Barcode Input */}
-          <ScannerInput
+      {/* Main Content Router based on Active Navigation Tab */}
+      <main className="flex-1 flex flex-col overflow-hidden relative">
+        {activeTab === 'pos' && (
+          <div className="flex-1 flex flex-col lg:flex-row h-full overflow-hidden">
+            {/* Left Side: Workstation Register (Scanner, Items Table, Totals, Actions) */}
+            <section className="flex-1 flex flex-col h-full overflow-hidden bg-white lg:border-r border-neutral-300">
+              {/* Scanner Barcode Input */}
+              <ScannerInput
+                products={products}
+                onScanProduct={(prod, qty) => handleScanProduct(prod, qty)}
+                onOpenQuickCatalog={() => setActiveTab('catalog')}
+                onOpenAirtime={() => setShowAirtimeModal(true)}
+                onOpenServices={() => setShowServicesModal(true)}
+                onOpenBanking={() => setShowBankingModal(true)}
+                onOpenPremia={() => setShowPremiaModal(true)}
+                onOpenCameraScanner={() => setShowCameraScanner(true)}
+              />
+
+              {/* Current Sale Ticket Table */}
+              <TicketTable
+                items={cartItems}
+                selectedItemId={selectedItemId}
+                onSelectItem={(id) => setSelectedItemId(id)}
+                onUpdateQuantity={handleUpdateQuantity}
+                onRemoveItem={handleRemoveItem}
+              />
+
+              {/* Large POS Totals Summary Bar */}
+              <TotalsSummary
+                items={cartItems}
+                subtotal={subtotal}
+                iva={iva}
+                ieps={ieps}
+                totalDiscount={totalDiscount}
+                redondeo={redondeo}
+                total={grandTotal}
+                redondeoEnabled={redondeoEnabled}
+                onToggleRedondeo={() => setRedondeoEnabled((prev) => !prev)}
+                premiaCardNumber={premiaCardNumber}
+                premiaPointsEarned={premiaPointsEarned}
+                onOpenPaymentModal={() => setShowPaymentModal(true)}
+                onClearCart={handleClearCart}
+                onOpenPremiaModal={() => setShowPremiaModal(true)}
+              />
+            </section>
+
+            {/* Right Side: Quick Product Touchpad Catalog (Side-by-side on desktop) */}
+            <aside className="hidden lg:flex w-80 lg:w-96 xl:w-[400px] h-full flex-col shrink-0">
+              <ProductCatalog
+                products={products}
+                onSelectProduct={(prod) => handleScanProduct(prod, 1)}
+              />
+            </aside>
+          </div>
+        )}
+
+        {activeTab === 'catalog' && (
+          <div className="flex-1 flex flex-col h-full overflow-hidden">
+            <div className="bg-amber-50 border-b border-amber-200 px-3 sm:px-4 py-2 flex items-center justify-between text-xs shrink-0">
+              <span className="font-bold text-amber-900 truncate">
+                Catálogo Táctil: Toque cualquier producto para agregarlo a la cuenta.
+              </span>
+              <button
+                type="button"
+                onClick={() => setActiveTab('pos')}
+                className="px-3 py-1 bg-[#E21B23] text-white rounded font-bold cursor-pointer hover:bg-red-700 whitespace-nowrap ml-2"
+              >
+                Volver a Caja ({cartItems.length} items)
+              </button>
+            </div>
+            <ProductCatalog
+              products={products}
+              onSelectProduct={(prod) => {
+                handleScanProduct(prod, 1);
+              }}
+            />
+          </div>
+        )}
+
+        {activeTab === 'inventory' && (
+          <InventoryModule
             products={products}
-            onScanProduct={(prod, qty) => handleScanProduct(prod, qty)}
-            onOpenQuickCatalog={() => setShowQuickCatalog(true)}
-            onOpenAirtime={() => setShowAirtimeModal(true)}
-            onOpenServices={() => setShowServicesModal(true)}
-            onOpenBanking={() => setShowBankingModal(true)}
-            onOpenPremia={() => setShowPremiaModal(true)}
-            onOpenCameraScanner={() => setShowCameraScanner(true)}
+            onAddProduct={handleAddProduct}
+            onUpdateProduct={handleUpdateProduct}
+            onDeleteProduct={handleDeleteProduct}
+            onAdjustStock={handleAdjustStock}
           />
+        )}
 
-          {/* Current Sale Ticket Table */}
-          <TicketTable
-            items={cartItems}
-            selectedItemId={selectedItemId}
-            onSelectItem={(id) => setSelectedItemId(id)}
-            onUpdateQuantity={handleUpdateQuantity}
-            onRemoveItem={handleRemoveItem}
-          />
+        {activeTab === 'suppliers' && (
+          <SuppliersModule />
+        )}
 
-          {/* Large POS Totals Summary Bar */}
-          <TotalsSummary
-            items={cartItems}
-            subtotal={subtotal}
-            iva={iva}
-            ieps={ieps}
-            totalDiscount={totalDiscount}
-            redondeo={redondeo}
-            total={grandTotal}
-            redondeoEnabled={redondeoEnabled}
-            onToggleRedondeo={() => setRedondeoEnabled((prev) => !prev)}
-            premiaCardNumber={premiaCardNumber}
-            premiaPointsEarned={premiaPointsEarned}
-            onOpenPaymentModal={() => setShowPaymentModal(true)}
-            onClearCart={handleClearCart}
-            onOpenPremiaModal={() => setShowPremiaModal(true)}
-          />
-        </section>
-
-        {/* Right Side: Quick Product Touchpad Catalog */}
-        <aside className="w-full md:w-80 lg:w-96 xl:w-[420px] h-full flex flex-col shrink-0">
-          <ProductCatalog
+        {activeTab === 'metrics' && (
+          <MetricsModule
+            shift={shift}
             products={products}
-            onSelectProduct={(prod) => handleScanProduct(prod, 1)}
+            recentTransactions={recentTransactions}
           />
-        </aside>
+        )}
       </main>
 
       {/* Bottom Physical POS Function Keyboard Strip (F1 to F12) */}
       <FunctionKeyboard
-        onF1={() => setShowQuickCatalog(true)}
+        onF1={() => {
+          setActiveTab((prev) => (prev === 'catalog' ? 'pos' : 'catalog'));
+        }}
         onF2={handleF2Multiplier}
         onF3={() => setShowAirtimeModal(true)}
         onF4={() => setShowServicesModal(true)}

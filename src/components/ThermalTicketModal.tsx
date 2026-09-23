@@ -35,16 +35,16 @@ export const ThermalTicketModal: React.FC<ThermalTicketModalProps> = ({
           {/* Top jagged tear edge */}
           <div className="w-full h-2 ticket-tear-top -mt-3 mb-2 no-print opacity-60"></div>
 
-          {/* OXXO Official Fiscal Header */}
+          {/* Authentic Fiscal Header */}
           <div className="text-center space-y-0.5 border-b border-dashed border-neutral-400 pb-3">
             <h2 className="text-base font-black tracking-tighter text-neutral-900 font-sans">
-              CADENA COMERCIAL OXXO, S.A. DE C.V.
+              ABARROTES MARICELA, S.A. DE C.V.
             </h2>
-            <p className="font-bold">RFC: CCO-860523-1N4</p>
-            <p className="text-[10px]">EDISON 1235 NTE. COL. TALLERES</p>
-            <p className="text-[10px]">MONTERREY, NUEVO LEON C.P. 64480</p>
+            <p className="font-bold">RFC: MAR-860523-1N4</p>
+            <p className="text-[10px]">AV. HIDALGO 450 COL. CENTRO</p>
+            <p className="text-[10px]">MONTERREY, NUEVO LEÓN C.P. 64000</p>
             <p className="text-[10px] text-neutral-600">
-              REGIMEN OPCIONAL PARA GRUPOS DE SOCIEDADES
+              RÉGIMEN GENERAL DE LEY PERSONAS MORALES
             </p>
           </div>
 
@@ -214,8 +214,8 @@ export const ThermalTicketModal: React.FC<ThermalTicketModalProps> = ({
             <div className="text-[9px] text-neutral-600 space-y-0.5 pt-1">
               <p className="font-bold">PAGO HECHO EN UNA SOLA EXHIBICION</p>
               <p>LUGAR DE EXPEDICION: MONTERREY, N.L.</p>
-              <p>GRACIAS POR SU COMPRA EN TIENDAS OXXO</p>
-              <p className="italic">¡A la vuelta de tu vida!</p>
+              <p>GRACIAS POR SU COMPRA EN ABARROTES MARICELA</p>
+              <p className="italic">¡Siempre surtido, siempre cerca de ti!</p>
             </div>
           </div>
 
