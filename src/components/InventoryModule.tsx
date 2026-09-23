@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { 
   Package, Search, Plus, AlertTriangle, CheckCircle, Edit3, Trash2, 
-  ArrowUpDown, DollarSign, Filter, RefreshCw, Barcode, Check, X
+  ArrowUpDown, DollarSign, Filter, RefreshCw, Barcode, Check, X, Camera
 } from 'lucide-react';
 import { Product, ProductCategory } from '../types/pos';
 import { playSuccessChime, playScannerBeep } from '../utils/audio';
@@ -12,6 +12,7 @@ interface InventoryModuleProps {
   onUpdateProduct: (product: Product) => void;
   onDeleteProduct: (productId: string) => void;
   onAdjustStock: (productId: string, delta: number) => void;
+  onOpenCameraScanner?: () => void;
 }
 
 export const InventoryModule: React.FC<InventoryModuleProps> = ({
@@ -20,6 +21,7 @@ export const InventoryModule: React.FC<InventoryModuleProps> = ({
   onUpdateProduct,
   onDeleteProduct,
   onAdjustStock,
+  onOpenCameraScanner,
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -207,10 +209,22 @@ export const InventoryModule: React.FC<InventoryModuleProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
+          {onOpenCameraScanner && (
+            <button
+              type="button"
+              onClick={onOpenCameraScanner}
+              className="flex-1 sm:flex-none px-3.5 py-2 bg-[#FFCE00] hover:bg-[#F3C000] text-neutral-950 rounded-lg text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer border-2 border-yellow-400"
+              title="Escanear código de barras con la cámara"
+            >
+              <Camera className="w-4 h-4 text-neutral-950" />
+              <span>Escanear con Cámara</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={handleOpenAddModal}
-            className="flex-1 sm:flex-none px-4 py-2 bg-[#E21B23] hover:bg-[#C1121F] text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+            className="flex-1 sm:flex-none px-4 py-2 bg-[#E21B23] hover:bg-[#C1121F] text-white rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Nuevo Artículo</span>

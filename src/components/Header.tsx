@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Volume2, VolumeX, ShieldCheck, Clock, Users, ArrowRightLeft, 
-  Store, ShoppingCart, Package, Truck, BarChart3, Menu, X, BookOpen
+  Store, ShoppingCart, Package, Truck, BarChart3, Menu, X, BookOpen, Camera
 } from 'lucide-react';
 
 export type NavTab = 'pos' | 'catalog' | 'inventory' | 'suppliers' | 'metrics';
@@ -18,6 +18,7 @@ interface HeaderProps {
   onToggleSound: () => void;
   onOpenSecondRegister: () => void;
   onOpenCorteCaja: () => void;
+  onOpenCameraScanner?: () => void;
   cartCount: number;
 }
 
@@ -33,6 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleSound,
   onOpenSecondRegister,
   onOpenCorteCaja,
+  onOpenCameraScanner,
   cartCount,
 }) => {
   const [currentTime, setCurrentTime] = useState<string>('');
@@ -132,6 +134,17 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Quick Action Buttons for small screens right in brand row */}
           <div className="flex md:hidden items-center gap-1.5">
+            {onOpenCameraScanner && (
+              <button
+                type="button"
+                onClick={onOpenCameraScanner}
+                className="flex items-center gap-1 px-2.5 py-1.5 bg-[#FFCE00] hover:bg-[#F3C000] text-neutral-950 rounded-lg text-xs font-black border-2 border-yellow-300 shadow-sm cursor-pointer"
+                title="Activar Cámara"
+              >
+                <Camera className="w-4 h-4 text-neutral-950" />
+                <span>Cámara</span>
+              </button>
+            )}
             <button
               onClick={onOpenSecondRegister}
               className="p-2 bg-[#B91C1C] hover:bg-[#991B1B] text-white rounded-lg text-xs font-bold border border-red-400/40"
@@ -150,6 +163,18 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center / Right: Responsive Navigation Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 md:pb-0 scrollbar-none">
+          {onOpenCameraScanner && (
+            <button
+              type="button"
+              onClick={onOpenCameraScanner}
+              className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#FFCE00] hover:bg-yellow-300 text-neutral-950 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap shadow-md border-2 border-yellow-200 ring-2 ring-yellow-400 shrink-0"
+              title="Activar Cámara del celular, tablet o laptop para leer códigos de barra"
+            >
+              <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-950" />
+              <span>Activar Cámara</span>
+            </button>
+          )}
+
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;

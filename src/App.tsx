@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { Camera, Scan } from 'lucide-react';
 import { Header, NavTab } from './components/Header';
 import { ScannerInput } from './components/ScannerInput';
 import { TicketTable } from './components/TicketTable';
@@ -487,6 +488,7 @@ export default function App() {
         onToggleSound={() => setSoundEnabled((prev) => !prev)}
         onOpenSecondRegister={() => setShowSecondRegisterModal(true)}
         onOpenCorteCaja={() => setShowCorteCajaModal(true)}
+        onOpenCameraScanner={() => setShowCameraScanner(true)}
         cartCount={cartItems.length}
       />
 
@@ -576,6 +578,7 @@ export default function App() {
             onUpdateProduct={handleUpdateProduct}
             onDeleteProduct={handleDeleteProduct}
             onAdjustStock={handleAdjustStock}
+            onOpenCameraScanner={() => setShowCameraScanner(true)}
           />
         )}
 
@@ -612,7 +615,29 @@ export default function App() {
         onF12={() => {
           if (cartItems.length > 0) setShowPaymentModal(true);
         }}
+        onCameraScanner={() => setShowCameraScanner(true)}
       />
+
+      {/* Floating Camera Scanner Action Button (Unmissable across all views and devices) */}
+      <button
+        onClick={() => setShowCameraScanner(true)}
+        type="button"
+        className="fixed bottom-16 right-3 sm:bottom-16 sm:right-6 z-40 bg-[#E21B23] hover:bg-[#C1121F] text-white p-3 sm:px-4 sm:py-3 rounded-full sm:rounded-2xl shadow-2xl border-2 border-white flex items-center gap-2.5 cursor-pointer transition-all hover:scale-105 active:scale-95 group ring-4 ring-red-500/40 no-print"
+        title="Activar Cámara para escanear código de barras"
+      >
+        <div className="relative">
+          <Camera className="w-6 h-6 text-white" />
+          <Scan className="w-3.5 h-3.5 text-[#FFCE00] absolute -top-1 -right-1" />
+        </div>
+        <div className="flex flex-col text-left">
+          <span className="font-black text-xs sm:text-sm tracking-wide text-white leading-tight">
+            Activar Cámara
+          </span>
+          <span className="text-[10px] text-yellow-300 font-bold uppercase hidden sm:block">
+            Escanear Código
+          </span>
+        </div>
+      </button>
 
       {/* MODALS */}
       {/* 1. Payment Modal */}

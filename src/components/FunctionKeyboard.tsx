@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Camera } from 'lucide-react';
 
 interface FunctionKeyboardProps {
   onF1: () => void; // Catálogo
@@ -13,6 +14,7 @@ interface FunctionKeyboardProps {
   onF10: () => void; // Corte de Caja
   onF11: () => void; // Segunda Caja
   onF12: () => void; // Cobrar
+  onCameraScanner?: () => void;
 }
 
 export const FunctionKeyboard: React.FC<FunctionKeyboardProps> = ({
@@ -28,6 +30,7 @@ export const FunctionKeyboard: React.FC<FunctionKeyboardProps> = ({
   onF10,
   onF11,
   onF12,
+  onCameraScanner,
 }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -97,6 +100,23 @@ export const FunctionKeyboard: React.FC<FunctionKeyboardProps> = ({
 
   return (
     <footer className="bg-neutral-200 border-t border-neutral-300 px-2 sm:px-3 py-2 flex items-center justify-between gap-1.5 overflow-x-auto select-none no-print">
+      {onCameraScanner && (
+        <button
+          type="button"
+          onClick={onCameraScanner}
+          className="min-w-[85px] sm:min-w-[105px] px-2.5 py-1.5 rounded-lg text-center border-2 border-yellow-400 shadow-xs transition-all cursor-pointer flex flex-col items-center justify-center bg-[#FFCE00] hover:bg-[#F3C000] text-neutral-950 font-black shrink-0"
+          title="Activar escáner con cámara de celular, tablet o PC"
+        >
+          <span className="flex items-center gap-1 text-xs font-mono font-black tracking-tight">
+            <Camera className="w-3.5 h-3.5" />
+            <span>[CÁMARA]</span>
+          </span>
+          <span className="text-xs sm:text-sm font-sans font-black truncate w-full">
+            Escanear
+          </span>
+        </button>
+      )}
+
       {keys.map((k) => (
         <button
           key={k.key}

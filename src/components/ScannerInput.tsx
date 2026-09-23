@@ -100,8 +100,29 @@ export const ScannerInput: React.FC<ScannerInputProps> = ({
 
   return (
     <div className="bg-white border-b border-neutral-300 p-3 sm:p-3.5 shadow-xs no-print">
+      {/* Mobile-Friendly Quick Camera Trigger Banner */}
+      <div className="flex sm:hidden items-center justify-between gap-2 mb-2 px-3 py-2 bg-gradient-to-r from-amber-100 to-yellow-100 border-2 border-yellow-400 rounded-xl shadow-xs">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-[#FFCE00] flex items-center justify-center border border-yellow-500 shadow-2xs">
+            <Camera className="w-5 h-5 text-neutral-950" />
+          </div>
+          <div>
+            <div className="text-xs font-black text-neutral-950 leading-tight">Lector con Cámara</div>
+            <div className="text-[10px] text-neutral-700 font-semibold">Celular, tablet o laptop</div>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={onOpenCameraScanner}
+          className="px-3 py-1.5 bg-[#E21B23] hover:bg-[#C1121F] text-white rounded-lg text-xs font-black shadow-xs cursor-pointer flex items-center gap-1"
+        >
+          <Scan className="w-3.5 h-3.5" />
+          <span>Activar</span>
+        </button>
+      </div>
+
       {/* Scanner Barcode Bar */}
-      <form onSubmit={handleSubmit} className="flex items-center gap-2.5">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
             <Barcode className="w-6 h-6 text-neutral-600" />
@@ -128,14 +149,14 @@ export const ScannerInput: React.FC<ScannerInputProps> = ({
           </div>
         </div>
 
-        {/* Camera Scanner optical detector trigger */}
+        {/* Camera Scanner optical detector trigger - Highly Visible */}
         <button
           type="button"
           onClick={onOpenCameraScanner}
-          className="px-3.5 py-2.5 bg-red-50 hover:bg-red-100 text-[#E21B23] border-2 border-red-300 rounded-xl text-xs sm:text-sm font-black flex items-center gap-2 transition-colors cursor-pointer shrink-0 shadow-2xs"
+          className="px-4 py-2.5 bg-[#FFCE00] hover:bg-[#F3C000] text-neutral-950 border-2 border-yellow-400 hover:border-yellow-500 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 transition-all cursor-pointer shrink-0 shadow-md ring-2 ring-yellow-400/50"
           title="Abrir lector óptico con cámara de celular, tablet o laptop"
         >
-          <Camera className="w-5 h-5 text-[#E21B23]" />
+          <Camera className="w-5 h-5 text-neutral-950" />
           <span>Escanear con Cámara</span>
         </button>
 
@@ -143,10 +164,10 @@ export const ScannerInput: React.FC<ScannerInputProps> = ({
         <button
           type="button"
           onClick={onOpenQuickCatalog}
-          className="px-3.5 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border-2 border-amber-300 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
+          className="hidden sm:flex px-3.5 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border-2 border-amber-300 rounded-xl text-xs sm:text-sm font-bold items-center gap-1.5 transition-colors cursor-pointer shrink-0"
         >
           <Zap className="w-4 h-4 text-amber-600" />
-          <span className="hidden sm:inline">Catálogo (F1)</span>
+          <span>Catálogo (F1)</span>
         </button>
       </form>
 
