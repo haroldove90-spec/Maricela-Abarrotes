@@ -43,7 +43,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-full bg-neutral-100 border-l border-neutral-300 no-print select-none">
+    <div className="flex flex-col min-h-0 h-full bg-neutral-100 border-l border-neutral-300 no-print select-none">
       {/* Search Header */}
       <div className="p-2.5 bg-white border-b border-neutral-200">
         <div className="relative">

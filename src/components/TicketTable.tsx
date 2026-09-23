@@ -19,7 +19,7 @@ export const TicketTable: React.FC<TicketTableProps> = ({
 }) => {
   if (items.length === 0) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center p-8 text-neutral-400 bg-neutral-50/70 border-b border-neutral-300 select-none">
+      <div className="flex-1 min-h-[200px] sm:min-h-[260px] flex flex-col items-center justify-center p-6 sm:p-8 text-neutral-400 bg-neutral-50/70 border-b border-neutral-300 select-none">
         <div className="w-16 h-16 rounded-full bg-neutral-200/70 flex items-center justify-center mb-3">
           <Zap className="w-8 h-8 text-neutral-400" />
         </div>
@@ -48,7 +48,7 @@ export const TicketTable: React.FC<TicketTableProps> = ({
   }
 
   return (
-    <div className="flex-1 overflow-auto bg-white border-b border-neutral-300 select-none">
+    <div className="flex-1 min-h-[200px] sm:min-h-[260px] overflow-auto bg-white border-b border-neutral-300 select-none">
       <table className="w-full text-left border-collapse">
         <thead className="bg-neutral-800 text-neutral-200 text-xs sm:text-sm font-mono uppercase sticky top-0 z-10 font-bold">
           <tr>

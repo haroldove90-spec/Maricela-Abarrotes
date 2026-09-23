@@ -195,7 +195,7 @@ export const InventoryModule: React.FC<InventoryModuleProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-neutral-100 overflow-hidden">
+    <div className="flex-1 flex flex-col min-h-0 bg-neutral-100 overflow-y-auto">
       {/* Top Action Bar */}
       <div className="bg-white border-b border-neutral-300 p-3 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
         <div>

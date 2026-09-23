@@ -186,8 +186,8 @@ export const BarcodeCameraModal: React.FC<BarcodeCameraModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xs p-2 sm:p-4 select-none">
-      <div className="bg-neutral-900 rounded-2xl shadow-2xl border-2 sm:border-4 border-[#E21B23] w-full max-w-xl overflow-hidden flex flex-col max-h-[92vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto select-none">
+      <div className="bg-neutral-900 rounded-2xl shadow-2xl border-2 sm:border-4 border-[#E21B23] w-full max-w-xl overflow-hidden flex flex-col max-h-[92vh] my-auto">
         {/* Header */}
         <div className="bg-[#E21B23] text-white px-4 py-3 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">

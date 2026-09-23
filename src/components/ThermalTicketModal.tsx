@@ -25,8 +25,8 @@ export const ThermalTicketModal: React.FC<ThermalTicketModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4 select-none">
-      <div className="flex flex-col md:flex-row items-center gap-6 max-h-[95vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto select-none">
+      <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 max-h-[95vh] my-auto">
         {/* The Authentic Thermal Receipt */}
         <div
           ref={receiptRef}

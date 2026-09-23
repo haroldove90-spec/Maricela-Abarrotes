@@ -30,10 +30,10 @@ export const CashMovementModal: React.FC<CashMovementModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 select-none">
-      <div className="bg-white rounded-xl shadow-2xl border-4 border-amber-600 w-full max-w-md overflow-hidden flex flex-col animate-scale-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto select-none">
+      <div className="bg-white rounded-xl shadow-2xl border-4 border-amber-600 w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col animate-scale-in my-auto">
         {/* Header */}
-        <div className="bg-amber-600 text-white px-5 py-3.5 flex items-center justify-between">
+        <div className="bg-amber-600 text-white px-5 py-3.5 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
             <span className="bg-neutral-900 text-amber-400 font-black text-xs px-2 py-0.5 rounded">
               F9 TÓMBOLA
@@ -50,7 +50,7 @@ export const CashMovementModal: React.FC<CashMovementModalProps> = ({
           </button>
         </div>
 
-        <div className="p-6 bg-neutral-50 space-y-4">
+        <div className="p-6 bg-neutral-50 overflow-y-auto space-y-4">
           <div className="bg-amber-50 border border-amber-200 p-3 rounded-lg text-xs text-amber-900 flex items-center gap-2">
             <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0" />
             <span>

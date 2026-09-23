@@ -38,7 +38,7 @@ export const TotalsSummary: React.FC<TotalsSummaryProps> = ({
   const itemCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="bg-neutral-900 text-white p-3 sm:p-4 border-t-2 border-neutral-700 shadow-xl no-print select-none">
+    <div className="bg-neutral-900 text-white p-3 sm:p-4 border-t-2 border-neutral-700 shadow-xl no-print select-none shrink-0">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-center">
         {/* Left Side: Breakdown details & Redondeo */}
         <div className="lg:col-span-6 space-y-2 text-xs sm:text-sm font-mono">

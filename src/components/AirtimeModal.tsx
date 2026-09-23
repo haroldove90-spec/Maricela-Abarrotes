@@ -90,8 +90,8 @@ export const AirtimeModal: React.FC<AirtimeModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 select-none">
-      <div className="bg-white rounded-xl shadow-2xl border-4 border-[#2563EB] w-full max-w-xl overflow-hidden flex flex-col animate-scale-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto select-none">
+      <div className="bg-white rounded-xl shadow-2xl border-4 border-[#2563EB] w-full max-w-xl max-h-[92vh] overflow-hidden flex flex-col animate-scale-in my-auto">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-700 to-blue-900 text-white px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-2">
