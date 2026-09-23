@@ -96,18 +96,18 @@ export const FunctionKeyboard: React.FC<FunctionKeyboardProps> = ({
   ];
 
   return (
-    <footer className="bg-neutral-200 border-t border-neutral-300 px-2 py-1.5 flex items-center justify-between gap-1 overflow-x-auto select-none no-print">
+    <footer className="bg-neutral-200 border-t border-neutral-300 px-2 sm:px-3 py-2 flex items-center justify-between gap-1.5 overflow-x-auto select-none no-print">
       {keys.map((k) => (
         <button
           key={k.key}
           type="button"
           onClick={k.action}
-          className={`flex-1 min-w-[70px] max-w-[120px] px-1.5 py-1 rounded text-center border shadow-2xs transition-all cursor-pointer flex flex-col items-center justify-center ${k.color} bg-white text-neutral-800`}
+          className={`flex-1 min-w-[78px] sm:min-w-[90px] max-w-[130px] px-2 py-1.5 rounded-lg text-center border-2 shadow-2xs transition-all cursor-pointer flex flex-col items-center justify-center ${k.color} bg-white text-neutral-900`}
         >
-          <span className="text-[10px] font-mono font-bold tracking-tight opacity-75">
+          <span className="text-xs font-mono font-black tracking-tight opacity-80">
             [{k.key}]
           </span>
-          <span className="text-[11px] font-sans font-semibold truncate w-full">
+          <span className="text-xs sm:text-sm font-sans font-bold truncate w-full">
             {k.label}
           </span>
         </button>

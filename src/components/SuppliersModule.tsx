@@ -190,46 +190,46 @@ export const SuppliersModule: React.FC<SuppliersModuleProps> = () => {
       </div>
 
       {/* KPI Cards Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 p-3 sm:p-4 shrink-0">
-        <div className="bg-white p-3 rounded-xl border border-neutral-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5 p-3 sm:p-4 shrink-0">
+        <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 block">
             Proveedores Activos
           </span>
-          <div className="text-xl sm:text-2xl font-black font-mono text-neutral-900 mt-1">
-            {suppliers.length} <span className="text-xs font-sans text-neutral-400 font-normal">empresas distribuidoras</span>
+          <div className="text-2xl sm:text-3xl font-black font-mono text-neutral-950 mt-1">
+            {suppliers.length} <span className="text-xs sm:text-sm font-sans text-neutral-500 font-bold">empresas distribuidoras</span>
           </div>
         </div>
 
-        <div className="bg-white p-3 rounded-xl border border-neutral-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">
+        <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 block">
             Saldo Pendiente a Proveedores
           </span>
-          <div className="text-xl sm:text-2xl font-black font-mono text-red-600 mt-1">
+          <div className="text-2xl sm:text-3xl font-black font-mono text-red-600 mt-1">
             ${totalDebt.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{' '}
-            <span className="text-xs font-sans text-neutral-400 font-normal">MXN</span>
+            <span className="text-xs sm:text-sm font-sans text-neutral-500 font-bold">MXN</span>
           </div>
         </div>
 
-        <div className="bg-white p-3 rounded-xl border border-neutral-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">
+        <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 block">
             Pedidos Recibidos este Mes
           </span>
-          <div className="text-xl sm:text-2xl font-black font-mono text-emerald-600 mt-1">
-            {purchaseOrders.length} <span className="text-xs font-sans text-neutral-400 font-normal">facturas surtidas</span>
+          <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-600 mt-1">
+            {purchaseOrders.length} <span className="text-xs sm:text-sm font-sans text-neutral-500 font-bold">facturas surtidas</span>
           </div>
         </div>
       </div>
 
       {/* Search Toolbar */}
-      <div className="bg-white border-y border-neutral-200 px-3 sm:px-4 py-2 flex items-center justify-between shrink-0">
+      <div className="bg-white border-y border-neutral-200 px-3 sm:px-4 py-2.5 flex items-center justify-between shrink-0">
         <div className="relative flex-1 max-w-sm">
-          <Search className="w-4 h-4 absolute left-3 top-2.5 text-neutral-400" />
+          <Search className="w-5 h-5 absolute left-3 top-2.5 text-neutral-400" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar proveedor o preventista..."
-            className="w-full pl-9 pr-3 py-1.5 bg-neutral-50 border border-neutral-300 rounded-lg text-xs focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="w-full pl-10 pr-3 py-2 bg-neutral-50 border border-neutral-300 rounded-lg text-sm focus:bg-white focus:border-blue-600 focus:outline-none"
           />
         </div>
       </div>
@@ -238,56 +238,56 @@ export const SuppliersModule: React.FC<SuppliersModuleProps> = () => {
       <div className="flex-1 overflow-auto p-3 sm:p-4 grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Suppliers List */}
         <div className="lg:col-span-8 space-y-3">
-          <h3 className="text-xs font-bold text-neutral-700 uppercase tracking-wider">
+          <h3 className="text-xs sm:text-sm font-extrabold text-neutral-800 uppercase tracking-wider">
             Directorio de Proveedores y Rutas
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             {filteredSuppliers.map((supplier) => (
               <div
                 key={supplier.id}
-                className="bg-white p-4 rounded-xl border border-neutral-300 shadow-2xs flex flex-col justify-between space-y-3"
+                className="bg-white p-4 rounded-xl border border-neutral-300 shadow-2xs flex flex-col justify-between space-y-3 hover:shadow-md transition-shadow"
               >
                 <div>
-                  <div className="flex items-start justify-between gap-2 mb-1">
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
                     <div>
-                      <h4 className="font-bold text-sm text-neutral-900 leading-tight">
+                      <h4 className="font-black text-base sm:text-lg text-neutral-950 leading-tight">
                         {supplier.name}
                       </h4>
-                      <span className="text-[11px] text-neutral-500 font-mono">
+                      <span className="text-xs text-neutral-500 font-mono font-medium">
                         {supplier.companyName}
                       </span>
                     </div>
                     {supplier.pendingBalance > 0 ? (
-                      <span className="bg-red-50 text-red-700 font-mono font-bold text-xs px-2 py-0.5 rounded border border-red-200">
+                      <span className="bg-red-50 text-red-700 font-mono font-black text-xs sm:text-sm px-2.5 py-1 rounded-md border border-red-200">
                         Debe: ${supplier.pendingBalance.toFixed(2)}
                       </span>
                     ) : (
-                      <span className="bg-emerald-50 text-emerald-700 font-mono font-bold text-xs px-2 py-0.5 rounded border border-emerald-200">
+                      <span className="bg-emerald-50 text-emerald-800 font-mono font-bold text-xs sm:text-sm px-2.5 py-1 rounded-md border border-emerald-200">
                         Al corriente
                       </span>
                     )}
                   </div>
 
-                  <div className="space-y-1 text-xs text-neutral-600 pt-2 border-t border-neutral-100">
-                    <div className="flex items-center gap-1.5">
-                      <Phone className="w-3.5 h-3.5 text-neutral-400" />
+                  <div className="space-y-1.5 text-xs sm:text-sm text-neutral-700 pt-2.5 border-t border-neutral-100">
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-neutral-500" />
                       <span>{supplier.contactPerson} ({supplier.phone})</span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-neutral-400" />
-                      <span>Días de ruta: <strong className="text-neutral-800">{supplier.deliveryDays.join(', ')}</strong></span>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-neutral-500" />
+                      <span>Días de ruta: <strong className="text-neutral-900">{supplier.deliveryDays.join(', ')}</strong></span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-neutral-400" />
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-neutral-500" />
                       <span>Última entrega: {supplier.lastDelivery || 'Sin datos'}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-neutral-100 text-xs">
-                  <span className="text-[10px] text-neutral-400">
-                    Plazo: {supplier.creditDays} días de crédito
+                <div className="flex items-center justify-between pt-2.5 border-t border-neutral-100 text-xs sm:text-sm">
+                  <span className="text-xs text-neutral-500 font-medium">
+                    Plazo: {supplier.creditDays} días crédito
                   </span>
                   {supplier.pendingBalance > 0 && (
                     <button
@@ -297,7 +297,7 @@ export const SuppliersModule: React.FC<SuppliersModuleProps> = () => {
                         setPaymentAmount(supplier.pendingBalance.toString());
                         setIsPayDebtOpen(true);
                       }}
-                      className="px-2.5 py-1 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-[11px] font-bold cursor-pointer transition-colors"
+                      className="px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs sm:text-sm font-bold cursor-pointer transition-colors shadow-2xs"
                     >
                       Abonar Saldo
                     </button>
@@ -310,33 +310,33 @@ export const SuppliersModule: React.FC<SuppliersModuleProps> = () => {
 
         {/* Purchase Orders Log */}
         <div className="lg:col-span-4 bg-white p-4 rounded-xl border border-neutral-300 shadow-2xs flex flex-col">
-          <h3 className="text-xs font-bold text-neutral-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-            <FileText className="w-4 h-4 text-neutral-500" />
+          <h3 className="text-xs sm:text-sm font-extrabold text-neutral-800 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <FileText className="w-4 h-4 text-neutral-600" />
             <span>Últimas Entregas Recibidas</span>
           </h3>
 
           <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
             {purchaseOrders.length === 0 ? (
-              <p className="text-xs text-neutral-400 text-center py-6">
+              <p className="text-sm text-neutral-400 text-center py-6 font-medium">
                 No hay órdenes registradas.
               </p>
             ) : (
               purchaseOrders.map((po) => (
                 <div
                   key={po.id}
-                  className="p-3 rounded-lg border border-neutral-200 bg-neutral-50 hover:bg-neutral-100 transition-colors text-xs"
+                  className="p-3 rounded-xl border border-neutral-200 bg-neutral-50 hover:bg-neutral-100 transition-colors text-xs sm:text-sm"
                 >
-                  <div className="flex items-center justify-between font-bold text-neutral-900 mb-1">
+                  <div className="flex items-center justify-between font-black text-neutral-950 mb-1 text-sm sm:text-base">
                     <span>{po.supplierName}</span>
-                    <span className="font-mono text-emerald-700">
+                    <span className="font-mono text-emerald-700 font-black">
                       ${po.totalCost.toFixed(2)}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between text-[11px] text-neutral-500 font-mono">
+                  <div className="flex items-center justify-between text-xs text-neutral-600 font-mono font-medium">
                     <span>{po.folio}</span>
                     <span>{po.itemsCount} productos</span>
                   </div>
-                  <div className="text-[10px] text-neutral-400 mt-1">
+                  <div className="text-xs text-neutral-500 mt-1">
                     {po.date} · {po.notes}
                   </div>
                 </div>

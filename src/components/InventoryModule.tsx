@@ -219,45 +219,45 @@ export const InventoryModule: React.FC<InventoryModuleProps> = ({
       </div>
 
       {/* KPI Cards Row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 p-3 sm:p-4 shrink-0">
-        <div className="bg-white p-3 rounded-xl border border-neutral-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 p-3 sm:p-4 shrink-0">
+        <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 block">
             Total Artículos en Catálogo
           </span>
-          <div className="text-xl sm:text-2xl font-black font-mono text-neutral-900 mt-1">
-            {products.length} <span className="text-xs font-sans text-neutral-400 font-normal">items ({totalUnits} pzas)</span>
+          <div className="text-2xl sm:text-3xl font-black font-mono text-neutral-950 mt-1">
+            {products.length} <span className="text-xs sm:text-sm font-sans text-neutral-500 font-bold">({totalUnits} pzas)</span>
           </div>
         </div>
 
-        <div className="bg-white p-3 rounded-xl border border-neutral-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">
+        <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 block">
             Valor de Almacén al Costo
           </span>
-          <div className="text-xl sm:text-2xl font-black font-mono text-blue-700 mt-1">
+          <div className="text-2xl sm:text-3xl font-black font-mono text-blue-700 mt-1">
             ${totalCostValuation.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
         </div>
 
-        <div className="bg-white p-3 rounded-xl border border-neutral-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">
+        <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 block">
             Valor Estimado Venta
           </span>
-          <div className="text-xl sm:text-2xl font-black font-mono text-emerald-700 mt-1">
+          <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-700 mt-1">
             ${totalRetailValuation.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
         </div>
 
-        <div className="bg-white p-3 rounded-xl border border-neutral-200 shadow-2xs">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 block">
+        <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 block">
             Alertas de Stock
           </span>
-          <div className="flex items-center gap-3 mt-1 font-mono text-sm font-bold">
+          <div className="flex items-center gap-3 mt-1 font-mono text-base font-bold">
             <span className="text-amber-600 flex items-center gap-1">
-              <AlertTriangle className="w-3.5 h-3.5" />
+              <AlertTriangle className="w-4 h-4" />
               {lowStockCount} Bajo
             </span>
             <span className="text-red-600 flex items-center gap-1">
-              <X className="w-3.5 h-3.5" />
+              <X className="w-4 h-4" />
               {outOfStockCount} Agotado
             </span>
           </div>
@@ -328,23 +328,23 @@ export const InventoryModule: React.FC<InventoryModuleProps> = ({
       <div className="flex-1 overflow-auto p-3 sm:p-4">
         <div className="bg-white rounded-xl border border-neutral-300 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs border-collapse">
+            <table className="w-full text-left text-xs sm:text-sm border-collapse">
               <thead>
-                <tr className="bg-neutral-100 text-neutral-600 border-b border-neutral-200 font-mono text-[11px] uppercase tracking-wider">
-                  <th className="py-2.5 px-3">Código Barras</th>
-                  <th className="py-2.5 px-3">Producto / Descripción</th>
-                  <th className="py-2.5 px-3">Categoría</th>
-                  <th className="py-2.5 px-3 text-right">Costo ($)</th>
-                  <th className="py-2.5 px-3 text-right">Precio Venta ($)</th>
-                  <th className="py-2.5 px-3 text-right">Margen</th>
-                  <th className="py-2.5 px-3 text-center">Existencias</th>
-                  <th className="py-2.5 px-3 text-center">Acciones</th>
+                <tr className="bg-neutral-800 text-neutral-100 border-b border-neutral-300 font-mono text-xs sm:text-sm uppercase tracking-wider font-bold">
+                  <th className="py-3 px-3">Código Barras</th>
+                  <th className="py-3 px-3">Producto / Descripción</th>
+                  <th className="py-3 px-3">Categoría</th>
+                  <th className="py-3 px-3 text-right">Costo ($)</th>
+                  <th className="py-3 px-3 text-right">Precio Venta ($)</th>
+                  <th className="py-3 px-3 text-right">Margen</th>
+                  <th className="py-3 px-3 text-center">Existencias</th>
+                  <th className="py-3 px-3 text-center">Acciones</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-200 font-sans">
                 {filteredProducts.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="py-10 text-center text-neutral-500">
+                    <td colSpan={8} className="py-10 text-center text-neutral-500 font-medium text-sm">
                       No se encontraron productos coincidentes en el inventario.
                     </td>
                   </tr>
@@ -357,45 +357,45 @@ export const InventoryModule: React.FC<InventoryModuleProps> = ({
 
                     return (
                       <tr key={product.id} className="hover:bg-neutral-50 transition-colors">
-                        <td className="py-2.5 px-3 font-mono text-[11px] text-neutral-600 whitespace-nowrap">
+                        <td className="py-3 px-3 font-mono text-xs text-neutral-700 font-semibold whitespace-nowrap">
                           {product.barcode}
                         </td>
-                        <td className="py-2.5 px-3">
-                          <div className="font-bold text-neutral-900">{product.name}</div>
-                          <span className="text-[10px] text-neutral-400 font-mono">{product.brand}</span>
+                        <td className="py-3 px-3">
+                          <div className="font-extrabold text-neutral-950 text-sm sm:text-base leading-tight">{product.name}</div>
+                          <span className="text-xs text-neutral-500 font-mono font-medium">{product.brand}</span>
                         </td>
-                        <td className="py-2.5 px-3 whitespace-nowrap">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-neutral-100 text-neutral-700 capitalize">
+                        <td className="py-3 px-3 whitespace-nowrap">
+                          <span className="px-2.5 py-0.5 rounded text-xs font-bold bg-neutral-100 text-neutral-800 capitalize border border-neutral-200">
                             {product.category}
                           </span>
                         </td>
-                        <td className="py-2.5 px-3 text-right font-mono text-neutral-600 whitespace-nowrap">
+                        <td className="py-3 px-3 text-right font-mono text-neutral-700 font-semibold whitespace-nowrap text-sm">
                           ${product.cost.toFixed(2)}
                         </td>
-                        <td className="py-2.5 px-3 text-right font-mono font-bold text-neutral-900 whitespace-nowrap">
+                        <td className="py-3 px-3 text-right font-mono font-black text-neutral-950 whitespace-nowrap text-sm sm:text-base">
                           ${product.price.toFixed(2)}
                         </td>
-                        <td className="py-2.5 px-3 text-right font-mono text-[11px] text-emerald-700 font-bold whitespace-nowrap">
+                        <td className="py-3 px-3 text-right font-mono text-xs sm:text-sm text-emerald-700 font-black whitespace-nowrap">
                           {margin.toFixed(0)}%
                         </td>
-                        <td className="py-2.5 px-3 text-center whitespace-nowrap">
-                          <div className="inline-flex items-center gap-1.5">
+                        <td className="py-3 px-3 text-center whitespace-nowrap">
+                          <div className="inline-flex items-center gap-2">
                             {/* Quick adjust minus */}
                             <button
                               type="button"
                               onClick={() => onAdjustStock(product.id, -1)}
-                              className="w-6 h-6 rounded bg-neutral-100 hover:bg-neutral-200 text-neutral-700 font-bold flex items-center justify-center text-xs cursor-pointer"
+                              className="w-7 h-7 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-black flex items-center justify-center text-sm cursor-pointer transition-colors shadow-2xs"
                               title="Restar 1 unidad"
                             >
                               -
                             </button>
                             <span
-                              className={`px-2 py-0.5 rounded-full font-mono font-bold text-xs ${
+                              className={`px-3 py-1 rounded-lg font-mono font-black text-sm ${
                                 isOut
-                                  ? 'bg-red-100 text-red-800'
+                                  ? 'bg-red-100 text-red-800 border border-red-300'
                                   : isLow
-                                  ? 'bg-amber-100 text-amber-800'
-                                  : 'bg-emerald-50 text-emerald-800'
+                                  ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                                  : 'bg-emerald-100 text-emerald-900 border border-emerald-300'
                               }`}
                             >
                               {product.stock}
@@ -404,22 +404,22 @@ export const InventoryModule: React.FC<InventoryModuleProps> = ({
                             <button
                               type="button"
                               onClick={() => onAdjustStock(product.id, 1)}
-                              className="w-6 h-6 rounded bg-neutral-100 hover:bg-neutral-200 text-neutral-700 font-bold flex items-center justify-center text-xs cursor-pointer"
+                              className="w-7 h-7 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-black flex items-center justify-center text-sm cursor-pointer transition-colors shadow-2xs"
                               title="Agregar 1 unidad"
                             >
                               +
                             </button>
                           </div>
                         </td>
-                        <td className="py-2.5 px-3 text-center whitespace-nowrap">
-                          <div className="flex items-center justify-center gap-1">
+                        <td className="py-3 px-3 text-center whitespace-nowrap">
+                          <div className="flex items-center justify-center gap-1.5">
                             <button
                               type="button"
                               onClick={() => handleOpenEditModal(product)}
                               className="p-1.5 hover:bg-blue-50 text-blue-600 rounded transition-colors cursor-pointer"
                               title="Editar producto"
                             >
-                              <Edit3 className="w-3.5 h-3.5" />
+                              <Edit3 className="w-4 h-4" />
                             </button>
                             <button
                               type="button"
@@ -431,7 +431,7 @@ export const InventoryModule: React.FC<InventoryModuleProps> = ({
                               className="p-1.5 hover:bg-red-50 text-red-600 rounded transition-colors cursor-pointer"
                               title="Eliminar producto"
                             >
-                              <Trash2 className="w-3.5 h-3.5" />
+                              <Trash2 className="w-4 h-4" />
                             </button>
                           </div>
                         </td>

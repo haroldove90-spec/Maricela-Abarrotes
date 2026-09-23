@@ -50,18 +50,18 @@ export const TicketTable: React.FC<TicketTableProps> = ({
   return (
     <div className="flex-1 overflow-auto bg-white border-b border-neutral-300 select-none">
       <table className="w-full text-left border-collapse">
-        <thead className="bg-neutral-800 text-neutral-200 text-[11px] font-mono uppercase sticky top-0 z-10">
+        <thead className="bg-neutral-800 text-neutral-200 text-xs sm:text-sm font-mono uppercase sticky top-0 z-10 font-bold">
           <tr>
-            <th className="py-2 px-2 sm:px-3 w-10 sm:w-12 text-center hidden sm:table-cell">Part.</th>
-            <th className="py-2 px-2 sm:px-3">Descripción / Artículo</th>
-            <th className="py-2 px-2 sm:px-3 w-24 sm:w-28 text-center">Cant.</th>
-            <th className="py-2 px-2 sm:px-3 w-20 sm:w-24 text-right hidden sm:table-cell">P. Unit.</th>
-            <th className="py-2 px-2 sm:px-3 w-16 sm:w-24 text-right hidden md:table-cell">Descto.</th>
-            <th className="py-2 px-2 sm:px-3 w-20 sm:w-28 text-right">Importe</th>
-            <th className="py-2 px-1 sm:px-2 w-8 sm:w-10 text-center"></th>
+            <th className="py-2.5 px-2 sm:px-3 w-10 sm:w-12 text-center hidden sm:table-cell">Part.</th>
+            <th className="py-2.5 px-2 sm:px-3">Descripción / Artículo</th>
+            <th className="py-2.5 px-2 sm:px-3 w-28 sm:w-32 text-center">Cant.</th>
+            <th className="py-2.5 px-2 sm:px-3 w-24 sm:w-28 text-right hidden sm:table-cell">P. Unit.</th>
+            <th className="py-2.5 px-2 sm:px-3 w-20 sm:w-28 text-right hidden md:table-cell">Descto.</th>
+            <th className="py-2.5 px-2 sm:px-3 w-24 sm:w-32 text-right">Importe</th>
+            <th className="py-2.5 px-1 sm:px-2 w-10 text-center"></th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-neutral-200 text-xs font-mono">
+        <tbody className="divide-y divide-neutral-200 font-mono">
           {items.map((item, index) => {
             const isSelected = item.id === selectedItemId;
             return (
@@ -70,49 +70,51 @@ export const TicketTable: React.FC<TicketTableProps> = ({
                 onClick={() => onSelectItem(item.id)}
                 className={`transition-colors cursor-pointer ${
                   isSelected
-                    ? 'bg-amber-50/90 font-medium'
+                    ? 'bg-amber-100/90 font-medium'
                     : index % 2 === 0
                     ? 'bg-white hover:bg-neutral-50'
-                    : 'bg-neutral-50/50 hover:bg-neutral-100'
+                    : 'bg-neutral-50/70 hover:bg-neutral-100'
                 }`}
               >
                 {/* Partida number */}
-                <td className="py-2 px-2 sm:px-3 text-center text-neutral-500 text-[11px] hidden sm:table-cell">
+                <td className="py-2.5 px-2 sm:px-3 text-center text-neutral-600 font-bold text-xs sm:text-sm hidden sm:table-cell">
                   {String(index + 1).padStart(2, '0')}
                 </td>
 
                 {/* Description & metadata */}
-                <td className="py-2 px-2 sm:px-3">
+                <td className="py-2.5 px-2 sm:px-3">
                   <div className="flex flex-col">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       {/* Service Icon Badges */}
                       {item.isService && item.serviceType === 'tae' && (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] bg-blue-100 text-blue-800 px-1 py-0.2 rounded font-sans font-bold">
-                          <Smartphone className="w-2.5 h-2.5" /> TAE
+                        <span className="inline-flex items-center gap-1 text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-sans font-bold">
+                          <Smartphone className="w-3 h-3" /> TAE
                         </span>
                       )}
                       {item.isService && item.serviceType === 'bill' && (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] bg-emerald-100 text-emerald-800 px-1 py-0.2 rounded font-sans font-bold">
-                          <FileText className="w-2.5 h-2.5" /> SERVICIO
+                        <span className="inline-flex items-center gap-1 text-xs bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-sans font-bold">
+                          <FileText className="w-3 h-3" /> SERVICIO
                         </span>
                       )}
                       {item.isService && item.serviceType === 'deposit' && (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] bg-purple-100 text-purple-800 px-1 py-0.2 rounded font-sans font-bold">
-                          <Landmark className="w-2.5 h-2.5" /> DEPÓSITO
+                        <span className="inline-flex items-center gap-1 text-xs bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded font-sans font-bold">
+                          <Landmark className="w-3 h-3" /> DEPÓSITO
                         </span>
                       )}
 
-                      <span className="font-bold text-neutral-900 text-xs leading-tight">
+                      <span className="font-extrabold text-neutral-950 text-sm sm:text-base leading-tight">
                         {item.product.name}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-1.5 text-[10px] text-neutral-500 mt-0.5 flex-wrap">
-                      <span>CB: {item.product.barcode}</span>
+                    <div className="flex items-center gap-2 text-xs text-neutral-600 mt-1 flex-wrap">
+                      <span className="bg-neutral-100 px-1.5 py-0.2 rounded border border-neutral-200">
+                        CB: {item.product.barcode}
+                      </span>
                       {item.product.brand && (
                         <>
                           <span className="hidden sm:inline">·</span>
-                          <span className="hidden sm:inline">{item.product.brand}</span>
+                          <span className="hidden sm:inline font-semibold">{item.product.brand}</span>
                         </>
                       )}
                       {item.serviceMetadata?.phoneNumber && (
@@ -127,67 +129,67 @@ export const TicketTable: React.FC<TicketTableProps> = ({
 
                     {/* Promo notice */}
                     {item.discount > 0 && (
-                      <div className="flex items-center gap-1 text-[10px] text-emerald-700 font-sans font-semibold mt-0.5">
-                        <Tag className="w-3 h-3" />
-                        <span>Ahorro: -${item.discount.toFixed(2)}</span>
+                      <div className="flex items-center gap-1 text-xs text-emerald-700 font-sans font-bold mt-1">
+                        <Tag className="w-3.5 h-3.5" />
+                        <span>Ahorro aplicado: -${item.discount.toFixed(2)}</span>
                       </div>
                     )}
                   </div>
                 </td>
 
                 {/* Quantity Controls */}
-                <td className="py-2 px-1 sm:px-3 text-center" onClick={(e) => e.stopPropagation()}>
+                <td className="py-2.5 px-1 sm:px-3 text-center" onClick={(e) => e.stopPropagation()}>
                   {item.isService ? (
-                    <span className="text-neutral-700 font-bold">{item.quantity}</span>
+                    <span className="text-neutral-900 font-black text-sm sm:text-base">{item.quantity}</span>
                   ) : (
-                    <div className="inline-flex items-center border border-neutral-300 rounded bg-white shadow-2xs">
+                    <div className="inline-flex items-center border-2 border-neutral-300 rounded-lg bg-white shadow-2xs">
                       <button
                         type="button"
                         onClick={() => onUpdateQuantity(item.id, -1)}
-                        className="p-0.5 sm:p-1 hover:bg-neutral-100 text-neutral-600 transition-colors"
+                        className="p-1 sm:p-1.5 hover:bg-neutral-100 text-neutral-700 transition-colors"
                         title="Restar uno"
                       >
-                        <Minus className="w-3 h-3" />
+                        <Minus className="w-3.5 h-3.5" />
                       </button>
-                      <span className="px-1 sm:px-2 text-xs font-bold text-neutral-900 tabular-nums">
+                      <span className="px-2 sm:px-3 text-sm sm:text-base font-black text-neutral-950 tabular-nums">
                         {item.quantity}
                       </span>
                       <button
                         type="button"
                         onClick={() => onUpdateQuantity(item.id, 1)}
-                        className="p-0.5 sm:p-1 hover:bg-neutral-100 text-neutral-600 transition-colors"
+                        className="p-1 sm:p-1.5 hover:bg-neutral-100 text-neutral-700 transition-colors"
                         title="Sumar uno"
                       >
-                        <Plus className="w-3 h-3" />
+                        <Plus className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   )}
                 </td>
 
                 {/* Unit Price */}
-                <td className="py-2 px-2 sm:px-3 text-right text-neutral-600 tabular-nums hidden sm:table-cell">
+                <td className="py-2.5 px-2 sm:px-3 text-right text-neutral-700 font-semibold tabular-nums text-xs sm:text-sm hidden sm:table-cell">
                   ${item.unitPrice.toFixed(2)}
                 </td>
 
                 {/* Discount */}
-                <td className="py-2 px-2 sm:px-3 text-right text-emerald-600 tabular-nums hidden md:table-cell">
+                <td className="py-2.5 px-2 sm:px-3 text-right text-emerald-600 font-bold tabular-nums text-xs sm:text-sm hidden md:table-cell">
                   {item.discount > 0 ? `-$${item.discount.toFixed(2)}` : '$0.00'}
                 </td>
 
                 {/* Row Total */}
-                <td className="py-2 px-2 sm:px-3 text-right font-bold text-neutral-900 text-xs sm:text-sm tabular-nums whitespace-nowrap">
+                <td className="py-2.5 px-2 sm:px-3 text-right font-black text-neutral-950 text-sm sm:text-base md:text-lg tabular-nums whitespace-nowrap">
                   ${item.total.toFixed(2)}
                 </td>
 
                 {/* Remove Line Action */}
-                <td className="py-2 px-1 sm:px-2 text-center" onClick={(e) => e.stopPropagation()}>
+                <td className="py-2.5 px-1 sm:px-2 text-center" onClick={(e) => e.stopPropagation()}>
                   <button
                     type="button"
                     onClick={() => onRemoveItem(item.id)}
-                    className="p-1 text-neutral-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                    className="p-1.5 text-neutral-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                     title="Eliminar partida (F8)"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </td>
               </tr>

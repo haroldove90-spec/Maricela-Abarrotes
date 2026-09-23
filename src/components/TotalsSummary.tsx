@@ -38,50 +38,54 @@ export const TotalsSummary: React.FC<TotalsSummaryProps> = ({
   const itemCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="bg-neutral-900 text-white p-3.5 border-t border-neutral-700 shadow-lg no-print select-none">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center">
+    <div className="bg-neutral-900 text-white p-3 sm:p-4 border-t-2 border-neutral-700 shadow-xl no-print select-none">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-center">
         {/* Left Side: Breakdown details & Redondeo */}
-        <div className="lg:col-span-6 space-y-1.5 text-xs font-mono">
-          <div className="flex items-center justify-between text-neutral-300">
-            <span>Artículos Totales:</span>
-            <span className="font-bold text-white text-sm">{itemCount} pzas</span>
+        <div className="lg:col-span-6 space-y-2 text-xs sm:text-sm font-mono">
+          <div className="flex items-center justify-between text-neutral-200">
+            <span className="font-semibold">Artículos Totales:</span>
+            <span className="font-black text-white text-base bg-neutral-800 px-2.5 py-0.5 rounded border border-neutral-700">
+              {itemCount} pzas
+            </span>
           </div>
 
-          <div className="flex items-center justify-between text-neutral-400">
+          <div className="flex items-center justify-between text-neutral-300">
             <span>Subtotal:</span>
-            <span className="tabular-nums text-neutral-200">${subtotal.toFixed(2)} MXN</span>
+            <span className="tabular-nums font-bold text-neutral-100 text-sm sm:text-base">
+              ${subtotal.toFixed(2)} MXN
+            </span>
           </div>
 
           <div className="flex items-center justify-between text-neutral-400">
             <span>Impuestos (IVA 16% + IEPS 8%):</span>
-            <span className="tabular-nums text-neutral-200">
+            <span className="tabular-nums font-semibold text-neutral-200 text-xs sm:text-sm">
               ${(iva + ieps).toFixed(2)} MXN
             </span>
           </div>
 
           {totalDiscount > 0 && (
-            <div className="flex items-center justify-between text-emerald-400 font-semibold">
-              <span>Promociones / Ahorro OXXO:</span>
-              <span className="tabular-nums">-${totalDiscount.toFixed(2)} MXN</span>
+            <div className="flex items-center justify-between text-emerald-400 font-bold text-xs sm:text-sm">
+              <span>Promociones / Descuentos:</span>
+              <span className="tabular-nums text-sm sm:text-base">-${totalDiscount.toFixed(2)} MXN</span>
             </div>
           )}
 
-          {/* Authentic Mexican Redondeo OXXO Feature */}
-          <div className="pt-1.5 border-t border-neutral-800 flex items-center justify-between">
-            <label className="flex items-center gap-1.5 cursor-pointer text-[11px] text-neutral-300 hover:text-white">
+          {/* Redondeo Feature */}
+          <div className="pt-2 border-t border-neutral-800 flex items-center justify-between">
+            <label className="flex items-center gap-2 cursor-pointer text-xs sm:text-sm text-neutral-200 hover:text-white">
               <input
                 type="checkbox"
                 checked={redondeoEnabled}
                 onChange={onToggleRedondeo}
-                className="w-3.5 h-3.5 rounded text-[#E21B23] focus:ring-red-500 cursor-pointer"
+                className="w-4 h-4 rounded text-[#E21B23] focus:ring-red-500 cursor-pointer"
               />
-              <span className="flex items-center gap-1">
-                <Heart className="w-3 h-3 text-red-500 fill-red-500" />
-                Redondeo Pro-Niñez Mexicana:
+              <span className="flex items-center gap-1.5 font-medium">
+                <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+                Redondeo Pro-Niñez:
               </span>
             </label>
             <span
-              className={`tabular-nums font-bold ${
+              className={`tabular-nums font-extrabold text-sm sm:text-base ${
                 redondeoEnabled && redondeo > 0 ? 'text-[#FFCE00]' : 'text-neutral-500'
               }`}
             >
@@ -89,26 +93,26 @@ export const TotalsSummary: React.FC<TotalsSummaryProps> = ({
             </span>
           </div>
 
-          {/* OXXO Premia Bar */}
-          <div className="flex items-center justify-between text-[11px] bg-neutral-800/80 px-2 py-1 rounded border border-neutral-700/60">
-            <div className="flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#FFCE00]" />
+          {/* Premia Bar */}
+          <div className="flex items-center justify-between text-xs sm:text-sm bg-neutral-800 px-3 py-1.5 rounded-lg border border-neutral-700">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#FFCE00]" />
               {premiaCardNumber ? (
-                <span className="text-amber-300 font-sans font-bold">
-                  Premia #{premiaCardNumber.slice(-4)}
+                <span className="text-amber-300 font-sans font-bold text-xs sm:text-sm">
+                  Puntos Maricela #{premiaCardNumber.slice(-4)}
                 </span>
               ) : (
-                <span className="text-neutral-400 font-sans">Sin Tarjeta Premia</span>
+                <span className="text-neutral-300 font-sans text-xs">Sin Tarjeta Puntos</span>
               )}
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[#FFCE00] font-bold font-sans">
+            <div className="flex items-center gap-2.5">
+              <span className="text-[#FFCE00] font-black font-sans text-xs sm:text-sm">
                 +{premiaPointsEarned} pts
               </span>
               <button
                 type="button"
                 onClick={onOpenPremiaModal}
-                className="text-[10px] text-amber-400 underline hover:text-amber-300 font-sans cursor-pointer"
+                className="text-xs text-amber-400 font-bold underline hover:text-amber-300 font-sans cursor-pointer"
               >
                 {premiaCardNumber ? 'Cambiar' : 'Asociar (F6)'}
               </button>
@@ -117,32 +121,32 @@ export const TotalsSummary: React.FC<TotalsSummaryProps> = ({
         </div>
 
         {/* Right Side: Jumbo Total Screen & Big Action Buttons */}
-        <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-2">
+        <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-2.5">
           {/* Big Digital Total Display */}
-          <div className="bg-black/90 p-3 rounded-lg border-2 border-neutral-700 flex items-center justify-between shadow-inner">
+          <div className="bg-black p-3.5 sm:p-4 rounded-xl border-2 border-neutral-600 flex items-center justify-between shadow-inner">
             <div className="flex flex-col">
-              <span className="text-[10px] font-mono tracking-widest text-[#FFCE00] uppercase font-bold">
-                Total a Pagar
+              <span className="text-xs sm:text-sm font-mono tracking-widest text-[#FFCE00] uppercase font-black">
+                TOTAL A PAGAR
               </span>
-              <span className="text-xs text-neutral-400 font-mono">Moneda Nacional (MXN)</span>
+              <span className="text-xs text-neutral-400 font-mono font-medium">Moneda Nacional (MXN)</span>
             </div>
             <div className="text-right">
-              <div className="text-3xl sm:text-4xl font-black font-mono tracking-tight text-white tabular-nums">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-black font-mono tracking-tight text-[#FFCE00] tabular-nums drop-shadow-sm">
                 ${total.toFixed(2)}
               </div>
             </div>
           </div>
 
           {/* Action Button Row */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
               disabled={items.length === 0}
               onClick={onClearCart}
-              className="px-3 py-3 bg-neutral-800 hover:bg-neutral-700 disabled:opacity-40 disabled:hover:bg-neutral-800 text-neutral-300 hover:text-white rounded-lg font-mono text-xs font-bold flex items-center gap-1.5 border border-neutral-700 transition-colors cursor-pointer"
+              className="px-3.5 py-3 sm:py-3.5 bg-neutral-800 hover:bg-neutral-700 disabled:opacity-40 disabled:hover:bg-neutral-800 text-neutral-200 hover:text-white rounded-xl font-mono text-xs sm:text-sm font-bold flex items-center gap-1.5 border border-neutral-700 transition-colors cursor-pointer"
               title="Cancelar venta (Esc)"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-4 h-4" />
               <span>Cancelar</span>
             </button>
 
@@ -150,9 +154,9 @@ export const TotalsSummary: React.FC<TotalsSummaryProps> = ({
               type="button"
               disabled={items.length === 0}
               onClick={onOpenPaymentModal}
-              className="flex-1 py-3 px-4 bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-600 hover:from-emerald-500 hover:to-green-500 disabled:opacity-40 disabled:pointer-events-none text-white font-sans font-black text-sm uppercase tracking-wider rounded-lg shadow-lg hover:shadow-emerald-900/50 flex items-center justify-center gap-2 transition-all cursor-pointer border-2 border-emerald-400/40"
+              className="flex-1 py-3 sm:py-3.5 px-5 bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-600 hover:from-emerald-500 hover:to-green-500 disabled:opacity-40 disabled:pointer-events-none text-white font-sans font-black text-base sm:text-lg uppercase tracking-wider rounded-xl shadow-lg hover:shadow-emerald-900/50 flex items-center justify-center gap-2.5 transition-all cursor-pointer border-2 border-emerald-400/50"
             >
-              <CreditCard className="w-5 h-5 text-emerald-100" />
+              <CreditCard className="w-6 h-6 text-emerald-100" />
               <span>COBRAR [F12]</span>
             </button>
           </div>

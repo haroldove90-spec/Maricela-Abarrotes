@@ -58,15 +58,15 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
         </div>
 
         {/* Category Horizontal Filter Bar */}
-        <div className="flex items-center gap-1 overflow-x-auto pt-2 pb-0.5">
+        <div className="flex items-center gap-1.5 overflow-x-auto pt-2 pb-0.5">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-md whitespace-nowrap transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-bold rounded-lg whitespace-nowrap transition-colors cursor-pointer ${
                 selectedCategory === cat.id
                   ? 'bg-[#E21B23] text-white shadow-xs'
-                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                  : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'
               }`}
             >
               <span>{cat.icon}</span>
@@ -77,41 +77,41 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
       </div>
 
       {/* Grid of Product Cards */}
-      <div className="flex-1 overflow-y-auto p-2.5 grid grid-cols-2 xl:grid-cols-3 gap-2">
+      <div className="flex-1 overflow-y-auto p-2.5 sm:p-3 grid grid-cols-2 xl:grid-cols-3 gap-2.5">
         {filteredProducts.map((product) => (
           <button
             key={product.id}
             type="button"
             onClick={() => handleProductClick(product)}
-            className="group relative bg-white border border-neutral-200 hover:border-[#E21B23] rounded-lg p-2.5 text-left shadow-2xs hover:shadow-sm transition-all cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+            className="group relative bg-white border border-neutral-200 hover:border-[#E21B23] rounded-xl p-3 text-left shadow-2xs hover:shadow-md transition-all cursor-pointer flex flex-col justify-between active:scale-[0.98]"
           >
             <div>
               {/* Product Category Brand Tag */}
-              <div className="flex items-center justify-between text-[10px] text-neutral-400 mb-1">
-                <span className="font-semibold uppercase truncate">{product.brand}</span>
-                <span className="font-mono text-neutral-400">Stock: {product.stock}</span>
+              <div className="flex items-center justify-between text-xs text-neutral-500 mb-1">
+                <span className="font-bold uppercase truncate">{product.brand}</span>
+                <span className="font-mono text-neutral-500 font-semibold">Stock: {product.stock}</span>
               </div>
 
               {/* Product Title */}
-              <h4 className="text-xs font-bold text-neutral-900 line-clamp-2 leading-tight group-hover:text-[#E21B23] transition-colors">
+              <h4 className="text-sm font-black text-neutral-950 line-clamp-2 leading-tight group-hover:text-[#E21B23] transition-colors">
                 {product.name}
               </h4>
             </div>
 
             {/* Promo Tag */}
             {product.promoText && (
-              <div className="my-1.5 inline-flex items-center gap-1 px-1.5 py-0.5 bg-red-50 text-red-700 rounded text-[10px] font-bold border border-red-200">
-                <Tag className="w-2.5 h-2.5" />
+              <div className="my-1.5 inline-flex items-center gap-1 px-2 py-0.5 bg-red-50 text-red-700 rounded-md text-xs font-bold border border-red-200">
+                <Tag className="w-3 h-3" />
                 <span>{product.promoText}</span>
               </div>
             )}
 
             {/* Bottom: Price in MXN */}
-            <div className="mt-2 pt-1.5 border-t border-neutral-100 flex items-center justify-between">
-              <span className="text-[10px] text-neutral-500 font-mono">
-                {product.barcode.slice(-5)}
+            <div className="mt-2.5 pt-1.5 border-t border-neutral-100 flex items-center justify-between">
+              <span className="text-xs text-neutral-500 font-mono font-medium">
+                ...{product.barcode.slice(-5)}
               </span>
-              <span className="text-sm font-black font-mono text-neutral-900 group-hover:text-[#E21B23]">
+              <span className="text-base sm:text-lg font-black font-mono text-neutral-950 group-hover:text-[#E21B23]">
                 ${product.price.toFixed(2)}
               </span>
             </div>
@@ -119,7 +119,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
         ))}
 
         {filteredProducts.length === 0 && (
-          <div className="col-span-full py-12 text-center text-neutral-400 text-xs font-mono">
+          <div className="col-span-full py-12 text-center text-neutral-500 text-sm font-mono">
             No se encontraron productos con "{searchQuery}"
           </div>
         )}
