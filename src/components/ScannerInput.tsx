@@ -128,25 +128,25 @@ export const ScannerInput: React.FC<ScannerInputProps> = ({
           </div>
         </div>
 
-        {/* Camera Scanner simulation trigger */}
+        {/* Camera Scanner optical detector trigger */}
         <button
           type="button"
           onClick={onOpenCameraScanner}
-          className="px-3 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 border border-neutral-300 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
-          title="Abrir lector con cámara web"
+          className="px-3 py-2 bg-red-50 hover:bg-red-100 text-[#E21B23] border border-red-300 rounded text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 shadow-2xs"
+          title="Abrir lector óptico con cámara de celular, tablet o laptop"
         >
-          <Camera className="w-4 h-4 text-neutral-600" />
-          <span className="hidden sm:inline">Cámara</span>
+          <Camera className="w-4 h-4 text-[#E21B23]" />
+          <span>Escanear con Cámara</span>
         </button>
 
         {/* F1 Catalog Shortcut */}
         <button
           type="button"
           onClick={onOpenQuickCatalog}
-          className="px-3 py-2 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+          className="px-3 py-2 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
         >
           <Zap className="w-4 h-4 text-amber-600" />
-          <span>Catálogo (F1)</span>
+          <span className="hidden sm:inline">Catálogo (F1)</span>
         </button>
       </form>
 

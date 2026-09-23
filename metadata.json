@@ -1,6 +1,6 @@
 {
   "name": "Abarrotes Maricela - Punto de Venta",
   "description": "Sistema de punto de venta retail para Abarrotes Maricela con escaneo de código de barras, inventario, proveedores, métricas, servicios CFE, tiempo aire TAE y ticket térmico.",
-  "requestFramePermissions": [],
+  "requestFramePermissions": ["camera"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
