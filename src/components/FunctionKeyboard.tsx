@@ -99,7 +99,7 @@ export const FunctionKeyboard: React.FC<FunctionKeyboardProps> = ({
   ];
 
   return (
-    <footer className="bg-neutral-200 border-t border-neutral-300 px-2 sm:px-3 py-2 flex items-center justify-between gap-1.5 overflow-x-auto select-none no-print shrink-0">
+    <footer className="sticky bottom-0 z-20 bg-neutral-200 border-t border-neutral-300 px-2 sm:px-3 py-2 flex items-center justify-between gap-1.5 overflow-x-auto select-none no-print shrink-0 shadow-lg">
       {onCameraScanner && (
         <button
           type="button"

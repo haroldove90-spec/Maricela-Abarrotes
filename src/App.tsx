@@ -474,7 +474,7 @@ export default function App() {
   ]);
 
   return (
-    <div className="flex flex-col min-h-screen lg:h-screen w-full bg-neutral-100 overflow-x-hidden overflow-y-auto lg:overflow-hidden text-neutral-900 font-sans">
+    <div className="flex flex-col h-screen h-[100dvh] w-full bg-neutral-100 overflow-hidden text-neutral-900 font-sans">
       {/* Top Header */}
       <Header
         storeName={INITIAL_SHIFT.storeName}
@@ -497,7 +497,7 @@ export default function App() {
         {activeTab === 'pos' && (
           <div className="flex-1 flex flex-col lg:flex-row min-h-0 lg:h-full">
             {/* Left Side: Workstation Register (Scanner, Items Table, Totals, Actions) */}
-            <section className="flex-1 flex flex-col min-h-0 lg:h-full bg-white lg:border-r border-neutral-300">
+            <section className="flex-1 flex flex-col min-h-0 lg:h-full bg-white lg:border-r border-neutral-300 overflow-y-auto lg:overflow-hidden">
               {/* Scanner Barcode Input */}
               <ScannerInput
                 products={products}
@@ -622,7 +622,7 @@ export default function App() {
       <button
         onClick={() => setShowCameraScanner(true)}
         type="button"
-        className="fixed bottom-16 right-3 sm:bottom-16 sm:right-6 z-40 bg-[#E21B23] hover:bg-[#C1121F] text-white p-3 sm:px-4 sm:py-3 rounded-full sm:rounded-2xl shadow-2xl border-2 border-white flex items-center gap-2.5 cursor-pointer transition-all hover:scale-105 active:scale-95 group ring-4 ring-red-500/40 no-print"
+        className="fixed bottom-[68px] right-3 sm:bottom-20 sm:right-6 z-40 bg-[#E21B23] hover:bg-[#C1121F] text-white p-2.5 sm:px-4 sm:py-3 rounded-full sm:rounded-2xl shadow-2xl border-2 border-white flex items-center gap-2 cursor-pointer transition-all hover:scale-105 active:scale-95 group ring-4 ring-red-500/40 no-print"
         title="Activar Cámara para escanear código de barras"
       >
         <div className="relative">

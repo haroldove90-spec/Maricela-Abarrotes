@@ -74,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="bg-[#E21B23] text-white border-b-2 sm:border-b-4 border-[#FFCE00] select-none no-print shrink-0 shadow-md">
+    <header className="sticky top-0 z-30 bg-[#E21B23] text-white border-b-2 sm:border-b-4 border-[#FFCE00] select-none no-print shrink-0 shadow-md">
       {/* Top Micro Information Bar */}
       <div className="flex items-center justify-between px-2.5 sm:px-4 py-1.5 bg-[#C1121F] text-xs sm:text-sm font-mono border-b border-red-700/60 overflow-hidden">
         <div className="flex items-center gap-2 sm:gap-3 truncate">
